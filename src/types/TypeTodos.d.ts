@@ -9,6 +9,7 @@ export type TypeTodoItem = {
   todo: TypeTodo;
   // changeIsComplete: ( id: string, value: boolean ) => void;
   dispatch: React.Dispatch<Action>;
+  index: number;
 }
 
 export type TypeTodoList = {
@@ -16,4 +17,5 @@ export type TypeTodoList = {
   dispatch: React.Dispatch<Action>;
   filteredTodos: string;
   searching: string;
+  setTodos: any;
 }

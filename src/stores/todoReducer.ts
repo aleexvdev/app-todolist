@@ -36,7 +36,9 @@ export const todoReducer = (state: TypeTodo[], action: Action) => {
     }
 
     case SET_TODOS: {
+      putStorage('todolist', action.payload);
       return [...action.payload];
+
     }
 
     case DELETE_TODO: {

@@ -1,12 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { motion, useDragControls, Reorder, useMotionValue } from 'framer-motion'
 import { TypeTodoItem } from '../../types/TypeTodos'
-import { IconDragVertical } from '../../icons/IconDragVertical';
 import { IconCheck } from '../../icons/IconCheck';
 import { IconSaveEdit } from '../../icons/IconSaveEdit';
 import { IconDots } from '../../icons/IconDots';
 import { TodoConfig } from '../Cards/TodoConfig';
+import { IconCloseCircle } from '../../icons/IconCloseCircle';
+import { ReorderIcon } from '../../icons/IconDragMotion';
+import { useRaisedShadow } from '../../customhooks/useRaisedShadow';
 
-export const TodoItem = ( { todo, dispatch }: TypeTodoItem ) => {
+const variants = {
+  hidden: {
+    opacity: 0
+  },
+  visible: ({ delay }: { delay: number }) => ({
+    opacity: 1,
+    transition: {
+      delay,
+      duration: 1
+    }
+  })
+}
+
+export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
+
+  const dragControls = useDragControls();
+  const y = useMotionValue(0);
+  const boxShadow = useRaisedShadow(y);
 
   const { id, task, isCompleted } = todo;
   const cardRef = useRef<HTMLDivElement>(null);
@@ -33,6 +53,7 @@ export const TodoItem = ( { todo, dispatch }: TypeTodoItem ) => {
   }
 
   const showEditInput = () => {
+    setShowCardConfig(false);
     setShowEditTodo(true);
   }
 
@@ -57,10 +78,10 @@ export const TodoItem = ( { todo, dispatch }: TypeTodoItem ) => {
         id,
         task: editTodo
       }
-    })
+    });
+    todo.task = editTodo;
     setShowEditTodo(false);
   }
-
 
   const handleClickOutside = (event: MouseEvent) => {
     if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
@@ -68,10 +89,33 @@ export const TodoItem = ( { todo, dispatch }: TypeTodoItem ) => {
     }
   };
 
+  const cancelEditTodo = () => {
+    setEditTodo(todo.task);
+    setShowEditTodo(false);
+  }
+
   return (
-    <div key={id} className='border-x border-y rounded-xl my-5 flex w-full items-center justify-evenly'>
-      <span className='p-0 m-0 bg-neutral-800 h-full rounded-tl-xl rounded-bl-xl w-5 flex items-center justify-center hover:fill-white'>
-        <IconDragVertical fontSize={35} height={45} cursor={'grab'} />
+    <Reorder.Item 
+      value={todo}
+      id={id}
+      dragListener={false}
+      dragControls={dragControls}
+      layout
+      style={{ borderRadius:'14px', boxShadow, y }}
+    >
+      <motion.div
+        custom={{ delay: ( index + 1) * 0.1 }}
+        className='border-x border-y rounded-xl my-5 flex w-full items-center justify-evenly select-none bg-neutral-800'
+        layoutId={id}
+        initial='hidden'
+        animate='visible'
+        exit='hidden'
+        variants={variants}
+      >
+      <span className='px-2 py-1 m-0 h-full rounded-tl-xl w-8 flex items-center justify-center'>
+        <ReorderIcon 
+          dragControls={dragControls} 
+        />
       </span>
       <div className='py-2 px-3 w-full'>
         <div className='flex justify-between items-center'>
@@ -102,13 +146,24 @@ export const TodoItem = ( { todo, dispatch }: TypeTodoItem ) => {
           <div className='relative' ref={cardRef}>
             <div className='flex justify-between items-center gap-4'>
               {showEditTodo && (
-                <IconSaveEdit 
-                  fontSize={25} 
-                  cursor={'pointer'}
-                  onClick={editingTodo}  
-                />
+                <div className='flex justify-between items-center gap-2'>
+                  <IconSaveEdit 
+                    fontSize={25} 
+                    cursor={'pointer'}
+                    onClick={editingTodo}  
+                  />
+                  <IconCloseCircle 
+                    fontSize={25} 
+                    cursor={'pointer'}
+                    onClick={cancelEditTodo} 
+                  />
+                </div>
               )}
-              <IconDots fontSize={25} cursor={'pointer'} onClick={() => setShowCardConfig(!showCardConfig)} />
+              {!showEditTodo && (
+                <div className='flex justify-between items-center gap-2'>
+                  <IconDots fontSize={25} cursor={'pointer'} onClick={() => setShowCardConfig(!showCardConfig)} />
+                </div>
+              )}
             </div>
             {showCardConfig && (
               <div
@@ -120,6 +175,6 @@ export const TodoItem = ( { todo, dispatch }: TypeTodoItem ) => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div></Reorder.Item>
   )
 }

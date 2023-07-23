@@ -1,3 +1,5 @@
+import { TypeTodo } from "../types/TypeTodos";
+
 export const DateFunction = () => {
   const today: Date = new Date();
   const year: number = today.getFullYear();
@@ -62,4 +64,29 @@ export const getMonthName = () => {
     "December"
   ];
   return nameMonths[month];
+}
+
+export const getTodosActive = ( todos: TypeTodo[] ) => {
+  if (todos.length === 0 ) return 0;
+  const todosActive = todos.filter(todo => !todo.isCompleted);
+  return todosActive.length;
+}
+
+export const messageFilter = (filteredTodos: string, searching: number) => {
+  let message = '';
+  if (filteredTodos === 'All') {
+    message = 'No tasks for now';
+  } else if (filteredTodos === 'Active') {
+    message = 'No active tasks for now';
+  } else if (filteredTodos === 'Completed') {
+    message = 'No completed tasks for now';
+  } else {
+    message = 'Information not found';
+  }
+
+  if (searching > 0) {
+    message = 'Search not found';
+  }
+
+  return message;
 }
