@@ -132,7 +132,7 @@ export const TodoApp = () => {
               </motion.button>
             </div>
             <div className={`relative flex flex-row items-center w-full justify-end gap-4 h-12 sm:h-0 sm:pb-0 ${showForm ? '-z-10' : 'z-10'}`}>
-              <div className='flex items-center justify-between rounded-lg gap-2'>
+              <div className='flex items-center justify-end rounded-lg gap-2 w-full sm:w-auto sm:justify-between'>
                 {
                   inputSearchActive ?
                   (
@@ -196,7 +196,7 @@ export const TodoApp = () => {
               </motion.button>
               {showCardConfigMain && (
                 <div
-                  className='absolute right-0 top-9 z-50 w-52'
+                  className='absolute right-0 top-10 sm:top-4 z-50 w-64 sm:w-52'
                 >
                   <MainConfig handleAllDeleteCompleted={deleteCompleted} />
                 </div>

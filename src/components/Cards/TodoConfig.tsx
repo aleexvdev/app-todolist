@@ -27,7 +27,7 @@ export const TodoConfig = ( { editTodo, deleteTodo, disabled }: TypeTodoConfig )
       className='bg-black rounded-xl p-2'
     >
       <motion.ul 
-        className='w-full text-sm'
+        className='w-full text-[18px] sm:text-sm'
         variants={listVariants}
       >
         {
@@ -39,7 +39,7 @@ export const TodoConfig = ( { editTodo, deleteTodo, disabled }: TypeTodoConfig )
               whileHover={{ scale: 1.04 }}
             >
               <button className='flex justify-start items-center gap-3' onClick={editTodo}>
-                <IconEdit fontSize={18} /> Edit Task
+                <IconEdit fontSize={18} className='text-xl' /> Edit Task
               </button>
             </motion.li>
           )
@@ -50,7 +50,7 @@ export const TodoConfig = ( { editTodo, deleteTodo, disabled }: TypeTodoConfig )
           whileHover={{ scale: 1.04 }}
         >
           <button className='flex justify-start items-center gap-3' onClick={deleteTodo}>
-            <IconDelete fontSize={18} /> Delete Task
+            <IconDelete fontSize={18} className='text-xl' /> Delete Task
           </button>
         </motion.li>
       </motion.ul>

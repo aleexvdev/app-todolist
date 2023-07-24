@@ -23,7 +23,7 @@ export const MainConfig = ( { handleAllDeleteCompleted }: TypeMainConfig ) => {
       className='bg-black rounded-xl p-2'
     >
       <motion.ul 
-        className='w-full text-sm'
+        className='w-full text-[18px] sm:text-sm'
         variants={listVariants}
       >
         <motion.li 
@@ -32,7 +32,7 @@ export const MainConfig = ( { handleAllDeleteCompleted }: TypeMainConfig ) => {
           whileHover={{ scale: 1.04 }}
         >
           <button className='flex justify-start items-center gap-3' onClick={handleAllDeleteCompleted}>
-            <IconDelete fontSize={18} /> Delete Completed Tasks
+            <IconDelete fontSize={18} className='text-xl' /> Delete Completed Tasks
           </button>
         </motion.li>
       </motion.ul>

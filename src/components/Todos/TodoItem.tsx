@@ -155,7 +155,7 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
                           )
                         }
                       </div>
-                      <p className='w-full text-[18px]' style={{ position: 'relative', zIndex: '2' }}>
+                      <p className={`w-full text-[18px] ${isCompleted ? 'text-gray-500' : 'text-white'} `} style={{ position: 'relative', zIndex: '2' }}>
                         {todo.task}
                       </p>
                     </div>
@@ -198,7 +198,7 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
                 }
                 {showCardConfig && (
                   <div
-                    className='absolute right-0 top-7 z-50 w-36'
+                    className='absolute right-0 top-7 z-50 w-44 sm:w-36'
                   >
                     <TodoConfig id={id} editTodo={showEditInput} deleteTodo={deleteTodo} disabled={isCompleted} />
                   </div>
