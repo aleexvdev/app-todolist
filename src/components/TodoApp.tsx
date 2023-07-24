@@ -72,7 +72,7 @@ export const TodoApp = () => {
         transition={{ duration: 0.5 }}
       >
         <h1 className='flex items-center justify-center'>
-          <span className='sm:text-4xl font-medium tracking-wider text-3xl'>To<span className='text-blue-700'>-</span>Do <span className='text-blue-700'>List</span></span>
+          <span className='sm:text-4xl font-medium tracking-wider text-4xl'>To<span className='text-blue-700'>-</span>Do <span className='text-blue-700'>List</span></span>
         </h1>
         <div className='flex items-center justify-between mt-5'>
           <motion.div className='flex items-center justify-start' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
@@ -112,21 +112,21 @@ export const TodoApp = () => {
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className={`rounded-lg px-4 py-1 text-sm h-8 ${filteredTodos === 'All' ? 'bg-blue-700 border-[1px] border-blue-600':'bg-neutral-600 hover:bg-blue-700'}`} 
+                className={`rounded-lg px-4 py-1 h-10 text-lg sm:text-sm sm:h-8 ${filteredTodos === 'All' ? 'bg-blue-700 border-[1px] border-blue-600':'bg-neutral-600 hover:bg-blue-700'}`} 
                 onClick={() => setFilteredTodos('All')}>
                   All
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className={`rounded-lg px-4 py-1 text-sm h-8 ${filteredTodos === 'Active' ? 'bg-blue-700 border-[1px] border-blue-600':'bg-neutral-600 hover:bg-blue-700'}`} 
+                className={`rounded-lg px-4 py-1 h-10 text-lg sm:text-sm sm:h-8 ${filteredTodos === 'Active' ? 'bg-blue-700 border-[1px] border-blue-600':'bg-neutral-600 hover:bg-blue-700'}`} 
                 onClick={() => setFilteredTodos('Active')}>
                   Active
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className={`rounded-lg px-4 py-1 text-sm h-8 ${filteredTodos === 'Completed' ? 'bg-blue-700 border-[1px] border-blue-600':'bg-neutral-600 hover:bg-blue-700'}`} 
+                className={`rounded-lg px-4 py-1 h-10 text-lg sm:text-sm sm:h-8 ${filteredTodos === 'Completed' ? 'bg-blue-700 border-[1px] border-blue-600':'bg-neutral-600 hover:bg-blue-700'}`} 
                 onClick={() => setFilteredTodos('Completed')}>
                   Completed
               </motion.button>
@@ -161,7 +161,7 @@ export const TodoApp = () => {
                         <IconCloseLine 
                         fontSize={20} 
                         cursor={'pointer'}
-                        className='text-white '
+                        className='text-white text-2xl sm:text-xl'
                         onClick={closeInputSearch}
                       />
                       </motion.button>
@@ -176,7 +176,7 @@ export const TodoApp = () => {
                       className='bg-none hover:bg-neutral-500/20 rounded-full p-1'
                       onClick={() => { setInputSearchActive(!inputSearchActive); setShowCardConfigMain(false) }}
                     >
-                      <IconSearch fontSize={20} />
+                      <IconSearch fontSize={20} className='text-2xl sm:text-xl' />
                     </motion.button>
                   )
                 }
@@ -189,6 +189,7 @@ export const TodoApp = () => {
                 className='bg-none hover:bg-neutral-500/20 rounded-full p-1'
               >
                 <IconSettings
+                  className='text-2xl sm:text-xl'
                   fontSize={20}
                   onClick={() => setShowCardConfigMain(!showCardConfigMain)}
                 />

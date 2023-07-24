@@ -72,7 +72,7 @@ export const FormTodo = ( { onShowForm, dispatch }: FormProps) => {
   }
 
   return (
-    <div className="fixed inset-0 bg-neutral-800/50 bg-opacity-70 flex items-center justify-center" style={{ zIndex:'3' }}>
+    <div className="fixed inset-0 bg-neutral-800/50 bg-opacity-70 flex items-center justify-center mx-5 sm:mx-0" style={{ zIndex:'3' }}>
       <motion.section 
         className='h-auto rounded-3xl px-5 py-7' 
         style={{ width: '30rem', backgroundColor: '#080808' }}

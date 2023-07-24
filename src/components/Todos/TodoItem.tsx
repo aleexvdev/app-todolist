@@ -108,7 +108,7 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
     >
       <motion.div
         custom={{ delay: ( index + 1) * 0.1 }}
-        className='border-x border-y rounded-xl my-5 flex w-full h-12 items-center justify-evenly select-none bg-neutral-800 real'
+        className='border-x border-y rounded-xl my-5 flex w-full h-14 sm:h-12 items-center justify-evenly select-none bg-neutral-800 real'
         layoutId={id}
         initial='hidden'
         animate='visible'
@@ -121,14 +121,14 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
           }
         }} 
       >
-        <span className='px-3 py-1 m-0 h-full rounded-tl-xl w-[7%] flex items-center justify-center'>
+        <span className='px-3 py-1 m-0 h-full rounded-tl-xl w-[15%] sm:w-[7%] flex items-center justify-center '>
           <ReorderIcon 
             dragControls={dragControls} 
           />
         </span>
-        <div className='py-2 px-3 w-full'>
+        <div className='py-2 px-1 sm:px-3 w-full'>
           <div className='flex justify-between items-center'>
-            <label className='flex justify-between items-center cursor-pointer w-[85%]'>
+            <label className='flex justify-between items-center cursor-pointer w-[75%] sm:w-[85%]'>
               {
                 isCompleted ? 
                   <div className='rounded-xl w-5 h-5 bg-blue-700'>
@@ -155,7 +155,7 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
                           )
                         }
                       </div>
-                      <p className='w-full text-[15px]' style={{ position: 'relative', zIndex: '2' }}>
+                      <p className='w-full text-[18px]' style={{ position: 'relative', zIndex: '2' }}>
                         {todo.task}
                       </p>
                     </div>
@@ -163,10 +163,10 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
                 }
               </div>
             </label>
-            <div className='relative' ref={cardRef}>
+            <div className='relative w-[auto] sm:w-auto' ref={cardRef}>
               <div className='flex justify-between items-center gap-4'>
                 {showEditTodo && (
-                  <div className='flex justify-between items-center gap-2'>
+                  <div className='flex justify-center items-center gap-1 w-full pr-2 sm:pr-0'>
                     <IconSaveEdit 
                       fontSize={25} 
                       cursor={'pointer'}
@@ -182,7 +182,7 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
                 {
                   !showEditTodo && showIconDots && 
                   (
-                    <div className='flex justify-between items-center gap-2'>
+                    <div className='flex justify-between items-center gap-2 pr-2 sm:pr-0'>
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
