@@ -18,7 +18,7 @@ export const ListTodos = ( { todos, dispatch, filteredTodos, searching, setTodos
   }
 
   if (todosByFilter.length === 0) 
-  {
+  { 
     const message = messageFilter(filteredTodos, searching.length);
 
     return (
