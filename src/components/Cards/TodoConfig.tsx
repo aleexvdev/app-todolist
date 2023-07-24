@@ -6,16 +6,23 @@ type TypeTodoConfig = {
   id: string;
   editTodo: () => void;
   deleteTodo: () => void;
+  disabled: boolean;
 }
-export const TodoConfig = ( { editTodo, deleteTodo }: TypeTodoConfig ) => {
+export const TodoConfig = ( { editTodo, deleteTodo, disabled }: TypeTodoConfig ) => {
   return (
     <div className='bg-black rounded-xl p-2'>
       <ul className='w-full text-sm'>
-        <li className='px-1 py-2'>
-          <button className='flex justify-start items-center gap-3' onClick={editTodo}>
-            <IconEdit fontSize={18} /> Edit Task
-          </button>
-        </li>
+        {
+          !disabled && 
+          (
+            <li className='px-1 py-2'>
+              <button className='flex justify-start items-center gap-3' onClick={editTodo}>
+                <IconEdit fontSize={18} /> Edit Task
+              </button>
+            </li>
+          )
+        }
+        
         <li className='px-1 py-2'>
           <button className='flex justify-start items-center gap-3' onClick={deleteTodo}>
             <IconDelete fontSize={18} /> Delete Task

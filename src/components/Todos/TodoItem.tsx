@@ -105,76 +105,77 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
     >
       <motion.div
         custom={{ delay: ( index + 1) * 0.1 }}
-        className='border-x border-y rounded-xl my-5 flex w-full items-center justify-evenly select-none bg-neutral-800'
+        className='border-x border-y rounded-xl my-5 flex w-full items-center justify-evenly select-none bg-neutral-800 real'
         layoutId={id}
         initial='hidden'
         animate='visible'
         exit='hidden'
         variants={variants}
       >
-      <span className='px-2 py-1 m-0 h-full rounded-tl-xl w-8 flex items-center justify-center'>
-        <ReorderIcon 
-          dragControls={dragControls} 
-        />
-      </span>
-      <div className='py-2 px-3 w-full'>
-        <div className='flex justify-between items-center'>
-          <label className='flex justify-between items-center cursor-pointer w-full pr-10'>
-            {
-              isCompleted ? 
-                <div className='rounded-xl h-5 w-5 bg-blue-700'>
-                  <IconCheck fontSize={20} className='opacity-100' />
-                  <input type="checkbox" aria-disabled={false} aria-checked={false} id="todocomplete" className='cursor-pointer w-5 h-5 opacity-0' onChange={onChangeCompleted} />
-                </div>
-              : 
-                <div className='rounded-xl h-5 w-5 border-2 border-white hover:bg-white'>
-                  <input type="checkbox" aria-disabled={false} aria-checked={false} id="todocomplete" className='cursor-pointer w-5 h-5 opacity-0' onChange={onChangeCompleted} />
-                </div>
-            }
-            <div className='flex-col items-center ml-4 justify-star w-full'>
-              { showEditTodo ? 
-                (
-                  <input type="text" className='text-white bg-neutral-700 rounded-lg w-full outline-none px-3 text-lg' value={editTodo} name="todo" id="todo" onChange={onChangeEditTask} />
-                )
-                :
-                (
-                  <p className='text-[15px]'>{todo.task}</p>
-                )
+        <span className='px-3 py-1 m-0 h-full rounded-tl-xl w-10 flex items-center justify-center'>
+          <ReorderIcon 
+            dragControls={dragControls} 
+          />
+        </span>
+        <div className='py-2 px-3 w-full'>
+          <div className='flex justify-between items-center'>
+            <label className='flex justify-between items-center cursor-pointer w-full pr-10'>
+              {
+                isCompleted ? 
+                  <div className='rounded-xl h-5 w-5 bg-blue-700'>
+                    <IconCheck fontSize={20} className='opacity-100' />
+                    <input type="checkbox" aria-disabled={false} aria-checked={false} id="todocomplete" className='cursor-pointer w-5 h-5 opacity-0' onChange={onChangeCompleted} />
+                  </div>
+                : 
+                  <div className='rounded-xl h-5 w-5 border-2 border-white hover:bg-white'>
+                    <input type="checkbox" aria-disabled={false} aria-checked={false} id="todocomplete" className='cursor-pointer w-5 h-5 opacity-0' onChange={onChangeCompleted} />
+                  </div>
               }
-            </div>
-          </label>
-          <div className='relative' ref={cardRef}>
-            <div className='flex justify-between items-center gap-4'>
-              {showEditTodo && (
-                <div className='flex justify-between items-center gap-2'>
-                  <IconSaveEdit 
-                    fontSize={25} 
-                    cursor={'pointer'}
-                    onClick={editingTodo}  
-                  />
-                  <IconCloseCircle 
-                    fontSize={25} 
-                    cursor={'pointer'}
-                    onClick={cancelEditTodo} 
-                  />
-                </div>
-              )}
-              {!showEditTodo && (
-                <div className='flex justify-between items-center gap-2'>
-                  <IconDots fontSize={25} cursor={'pointer'} onClick={() => setShowCardConfig(!showCardConfig)} />
-                </div>
-              )}
-            </div>
-            {showCardConfig && (
-              <div
-                className='absolute right-0 top-7 z-50 w-32'
-              >
-                <TodoConfig id={id} editTodo={showEditInput} deleteTodo={deleteTodo} />
+              <div className='flex-col items-center ml-4 justify-star w-full'>
+                { showEditTodo ? 
+                  (
+                    <input type="text" className='text-white bg-neutral-700 rounded-lg w-full outline-none px-3 text-lg' value={editTodo} name="todo" id="todo" onChange={onChangeEditTask} />
+                  )
+                  :
+                  (
+                    <p className='text-[15px]'>{todo.task}</p>
+                  )
+                }
               </div>
-            )}
+            </label>
+            <div className='relative' ref={cardRef}>
+              <div className='flex justify-between items-center gap-4'>
+                {showEditTodo && (
+                  <div className='flex justify-between items-center gap-2'>
+                    <IconSaveEdit 
+                      fontSize={25} 
+                      cursor={'pointer'}
+                      onClick={editingTodo}  
+                    />
+                    <IconCloseCircle 
+                      fontSize={25} 
+                      cursor={'pointer'}
+                      onClick={cancelEditTodo} 
+                    />
+                  </div>
+                )}
+                {!showEditTodo && (
+                  <div className='flex justify-between items-center gap-2'>
+                    <IconDots fontSize={25} cursor={'pointer'} onClick={() => setShowCardConfig(!showCardConfig)} />
+                  </div>
+                )}
+                {showCardConfig && (
+                  <div
+                    className='absolute right-0 top-7 z-50 w-32'
+                  >
+                    <TodoConfig id={id} editTodo={showEditInput} deleteTodo={deleteTodo} disabled={isCompleted} />
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </motion.div></Reorder.Item>
+      </motion.div>
+    </Reorder.Item>
   )
 }
