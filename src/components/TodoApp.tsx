@@ -66,24 +66,24 @@ export const TodoApp = () => {
   return (
     <>
       <motion.header
-        className='bg-neutral-800/40 p-6 text-amber-50 sm:mt-12 rounded-lg select-none'
+        className='bg-neutral-800/40 text-amber-50 rounded-lg select-none sm:mx-0 sm:mt-12 sm:p-6 mt-6 p-4 mx-5'
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <h1 className='flex items-center justify-center'>
-          <span className='text-4xl font-medium tracking-wider'>To<span className='text-blue-700'>-</span>Do <span className='text-blue-700'>List</span></span>
+          <span className='sm:text-4xl font-medium tracking-wider text-3xl'>To<span className='text-blue-700'>-</span>Do <span className='text-blue-700'>List</span></span>
         </h1>
         <div className='flex items-center justify-between mt-5'>
           <motion.div className='flex items-center justify-start' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
-            <h1 className='text-3xl/8'>{ getNameDay() },  { getOrdinalDay() }</h1>
+            <h1 className='sm:text-3xl/8 text-xl/8'>{ getNameDay() },  { getOrdinalDay() }</h1>
           </motion.div>
           <motion.div className='flex items-center justify-start' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-            <span className='text-gray-500'>{ getTodosActive(state) } tasks</span>
+            <span className='text-gray-500 sm:text-xl/8 text-lg/8'>{ getTodosActive(state) } tasks</span>
           </motion.div>
         </div>
         <motion.div className='mt-1' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
-          <span className='text-sm/8 text-gray-500'>{ getMonthName() }</span>
+          <span className='sm:text-xl/8 text-lg/8 text-gray-500'>{ getMonthName() }</span>
         </motion.div>
         <motion.div
           className='text-right flex items-center justify-between'
@@ -105,10 +105,10 @@ export const TodoApp = () => {
           )}
         </motion.div>
       </motion.header>
-      <section className='pt-6'>
+      <section className='pt-4 mx-5 sm:pt-6 sm:mx-0'>
         <div ref={cardMainRef}>
-          <div className='flex flex-row items-center justify-between'>
-            <div className='flex flex-row gap-5'>
+          <div className='flex flex-col-reverse items-center justify-between sm:flex-row'>
+            <div className='flex flex-row gap-5 mt-3 sm:mt-0'>
               <motion.button 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
@@ -131,7 +131,7 @@ export const TodoApp = () => {
                   Completed
               </motion.button>
             </div>
-            <div className={`relative flex flex-row items-center justify-between gap-4 ${showForm ? '-z-10' : 'z-10'}`}>
+            <div className={`relative flex flex-row items-center w-full justify-end gap-4 h-12 sm:h-0 sm:pb-0 ${showForm ? '-z-10' : 'z-10'}`}>
               <div className='flex items-center justify-between rounded-lg gap-2'>
                 {
                   inputSearchActive ?
@@ -142,6 +142,7 @@ export const TodoApp = () => {
                         animate={{ x: "0" }}
                         exit={{ x: "100%" }}
                         transition={{ duration: 0.5 }}
+                        className='w-full'
                       >
                         <input
                           type="text"
@@ -180,18 +181,18 @@ export const TodoApp = () => {
                   )
                 }
               </div>
-                <motion.button
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className='bg-none hover:bg-neutral-500/20 rounded-full p-1'
-                >
-                  <IconSettings
-                    fontSize={20}
-                    onClick={() => setShowCardConfigMain(!showCardConfigMain)}
-                  />
-                </motion.button>
+              <motion.button
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{ duration: 0.3 }}
+                className='bg-none hover:bg-neutral-500/20 rounded-full p-1'
+              >
+                <IconSettings
+                  fontSize={20}
+                  onClick={() => setShowCardConfigMain(!showCardConfigMain)}
+                />
+              </motion.button>
               {showCardConfigMain && (
                 <div
                   className='absolute right-0 top-9 z-50 w-52'

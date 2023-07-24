@@ -32,7 +32,7 @@ export const ListTodos = ( { todos, dispatch, filteredTodos, searching, setTodos
   return (
     <motion.section
       layout
-      className='mt-4'
+      className='mt-4 mx-5 sm:mx-0'
     >
       <Reorder.Group 
         axis='y' 
