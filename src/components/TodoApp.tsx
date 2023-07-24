@@ -65,28 +65,46 @@ export const TodoApp = () => {
 
   return (
     <>
-      <header className='bg-neutral-800/50 p-6 text-amber-50 sm:mt-12 rounded-lg select-none'>
-        <div className='flex items-center justify-between'>
-          <div className='flex items-center justify-start'>
+      <motion.header
+        className='bg-neutral-800/40 p-6 text-amber-50 sm:mt-12 rounded-lg select-none'
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h1 className='flex items-center justify-center'>
+          <span className='text-4xl font-medium tracking-wider'>To<span className='text-blue-700'>-</span>Do <span className='text-blue-700'>List</span></span>
+        </h1>
+        <div className='flex items-center justify-between mt-5'>
+          <motion.div className='flex items-center justify-start' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
             <h1 className='text-3xl/8'>{ getNameDay() },  { getOrdinalDay() }</h1>
-          </div>
-          <div className='flex items-center justify-start'>
+          </motion.div>
+          <motion.div className='flex items-center justify-start' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
             <span className='text-gray-500'>{ getTodosActive(state) } tasks</span>
-          </div>
+          </motion.div>
         </div>
-        <div className='mt-1'>
+        <motion.div className='mt-1' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
           <span className='text-sm/8 text-gray-500'>{ getMonthName() }</span>
-        </div>
-        <div className='text-right flex items-center justify-between'>
+        </motion.div>
+        <motion.div
+          className='text-right flex items-center justify-between'
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
           <div className='w-full border-b border-gray-500'></div>
-          <button className='p-3 bg-blue-700 rounded-full' onClick={toggleForm}>
+          <motion.button
+            className='p-3 bg-blue-700 rounded-full'
+            onClick={toggleForm}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
             <IconAddTask className='fill-white' />
-          </button>
+          </motion.button>
           {showForm && (
             <FormTodo onShowForm={toggleForm} dispatch={dispatch}  />
           )}
-        </div>
-      </header>
+        </motion.div>
+      </motion.header>
       <section className='pt-6'>
         <div ref={cardMainRef}>
           <div className='flex flex-row items-center justify-between'>

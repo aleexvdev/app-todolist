@@ -40,6 +40,7 @@ export const ListTodos = ( { todos, dispatch, filteredTodos, searching, setTodos
         onReorder={setTodos}
         layoutScroll
         style={{ height: 'auto', overflowY: "hidden" }}
+        className='pb-16'
       >
         <AnimatePresence>
           {todosByFilter.map( (todo, index) => (

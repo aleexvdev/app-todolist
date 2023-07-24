@@ -115,35 +115,50 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
         exit='hidden'
         variants={variants}
         onMouseEnter={() => setShowIconDots(true)}
-        onMouseLeave={() => setShowIconDots(false)} 
+        onMouseLeave={() => { 
+          if (!showCardConfig) {
+            setShowIconDots(false)
+          }
+        }} 
       >
-        <span className='px-3 py-1 m-0 h-full rounded-tl-xl w-10 flex items-center justify-center'>
+        <span className='px-3 py-1 m-0 h-full rounded-tl-xl w-[7%] flex items-center justify-center'>
           <ReorderIcon 
             dragControls={dragControls} 
           />
         </span>
         <div className='py-2 px-3 w-full'>
           <div className='flex justify-between items-center'>
-            <label className='flex justify-between items-center cursor-pointer w-full pr-10'>
+            <label className='flex justify-between items-center cursor-pointer w-[85%]'>
               {
                 isCompleted ? 
-                  <div className='rounded-xl h-5 w-5 bg-blue-700'>
+                  <div className='rounded-xl w-5 h-5 bg-blue-700'>
                     <IconCheck fontSize={20} className='opacity-100' />
                     <input type="checkbox" aria-disabled={false} aria-checked={false} id="todocomplete" className='cursor-pointer w-5 h-5 opacity-0' onChange={onChangeCompleted} />
                   </div>
                 : 
-                  <div className='rounded-xl h-5 w-5 border-2 border-white hover:bg-white'>
+                  <div className='rounded-xl w-5 h-5 border-2 border-white hover:bg-white'>
                     <input type="checkbox" aria-disabled={false} aria-checked={false} id="todocomplete" className='cursor-pointer w-5 h-5 opacity-0' onChange={onChangeCompleted} />
                   </div>
               }
-              <div className='flex-col items-center ml-4 justify-star w-full'>
+              <div className='flex-col items-center pl-5 justify-start w-[100%]'>
                 { showEditTodo ? 
                   (
                     <input type="text" className='text-white bg-neutral-700 rounded-lg w-full outline-none px-3 text-lg' value={editTodo} name="todo" id="todo" onChange={onChangeEditTask} />
                   )
                   :
                   (
-                    <p className='text-[15px]'>{todo.task}</p>
+                    <div className='parent'>
+                      <div className='child' style={{ position: 'relative', zIndex: '1' }}>
+                        {
+                          isCompleted && (
+                            <span className='w-full border-b absolute top-3' style={{ border: '1.5px solid rgb(29 78 216)' }}></span>
+                          )
+                        }
+                      </div>
+                      <p className='w-full text-[15px]' style={{ position: 'relative', zIndex: '2' }}>
+                        {todo.task}
+                      </p>
+                    </div>
                   )
                 }
               </div>
@@ -178,7 +193,6 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
                           onClick={() => setShowCardConfig(!showCardConfig)}
                         />
                       </motion.button>
-                        
                     </div>
                   )
                 }
