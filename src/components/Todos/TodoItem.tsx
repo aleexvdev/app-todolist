@@ -30,9 +30,11 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
 
   const { id, task, isCompleted } = todo;
   const cardRef = useRef<HTMLDivElement>(null);
+  const mainDivItemRef = useRef(null);
   const [showCardConfig, setShowCardConfig] = useState(false);
   const [showEditTodo, setShowEditTodo] = useState(false);
   const [editTodo, setEditTodo] = useState<string>(task);
+  const [showIconDots, setShowIconDots] = useState(false);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -102,15 +104,18 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
       dragControls={dragControls}
       layout
       style={{ borderRadius:'14px', boxShadow, y }}
+      ref={mainDivItemRef}
     >
       <motion.div
         custom={{ delay: ( index + 1) * 0.1 }}
-        className='border-x border-y rounded-xl my-5 flex w-full items-center justify-evenly select-none bg-neutral-800 real'
+        className='border-x border-y rounded-xl my-5 flex w-full h-12 items-center justify-evenly select-none bg-neutral-800 real'
         layoutId={id}
         initial='hidden'
         animate='visible'
         exit='hidden'
         variants={variants}
+        onMouseEnter={() => setShowIconDots(true)}
+        onMouseLeave={() => setShowIconDots(false)} 
       >
         <span className='px-3 py-1 m-0 h-full rounded-tl-xl w-10 flex items-center justify-center'>
           <ReorderIcon 
@@ -159,11 +164,24 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
                     />
                   </div>
                 )}
-                {!showEditTodo && (
-                  <div className='flex justify-between items-center gap-2'>
-                    <IconDots fontSize={25} cursor={'pointer'} onClick={() => setShowCardConfig(!showCardConfig)} />
-                  </div>
-                )}
+                {
+                  !showEditTodo && showIconDots && 
+                  (
+                    <div className='flex justify-between items-center gap-2'>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                      >
+                        <IconDots 
+                          fontSize={25} 
+                          cursor={'pointer'}
+                          onClick={() => setShowCardConfig(!showCardConfig)}
+                        />
+                      </motion.button>
+                        
+                    </div>
+                  )
+                }
                 {showCardConfig && (
                   <div
                     className='absolute right-0 top-7 z-50 w-36'

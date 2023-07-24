@@ -127,7 +127,7 @@ export const TodoApp = () => {
                       >
                         <input
                           type="text"
-                          className={`text-black w-full h-8 rounded-lg px-3 outline-none text-sm `}
+                          className='w-full h-8 rounded-lg px-3 outline-none text-sm text-white bg-neutral-700'
                           onChange={onSearchInput}
                           placeholder='Search your task...'
                         />
