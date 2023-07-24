@@ -166,7 +166,7 @@ export const TodoItem = ( { todo, dispatch, index }: TypeTodoItem ) => {
                 )}
                 {showCardConfig && (
                   <div
-                    className='absolute right-0 top-7 z-50 w-32'
+                    className='absolute right-0 top-7 z-50 w-36'
                   >
                     <TodoConfig id={id} editTodo={showEditInput} deleteTodo={deleteTodo} disabled={isCompleted} />
                   </div>
