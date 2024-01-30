@@ -9,6 +9,13 @@ const DELETE_TODO = 'DELETE_TODO';
 const DELETE_COMPLETE_TODOS = 'DELETE_COMPLETE_TODOS';
 
 type Action = | { type: string, payload?: any | [] }
+// type Action =
+//   | { type: 'ADD_TODO', payload: TypeTodo }
+//   | { type: 'EDIT_TODO', payload: { id: string, task: string } }
+//   | { type: 'TOGGLE_COMPLETED', payload: { id: string, isCompleted: boolean } }
+//   | { type: 'SET_TODOS', payload: TypeTodo[] }
+//   | { type: 'DELETE_TODO', payload: { id: string } }
+//   | { type: 'DELETE_COMPLETE_TODOS' };
 
 export const todoReducer = (state: TypeTodo[], action: Action) => {
   switch (action.type) {

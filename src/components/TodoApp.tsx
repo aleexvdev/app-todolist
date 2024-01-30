@@ -210,7 +210,7 @@ export const TodoApp = () => {
         searching={searchingTodo} 
         filteredTodos={filteredTodos} 
         dispatch={dispatch} 
-        setTodos={(todos: TypeTodo) => dispatch({ type: 'SET_TODOS', payload: todos })} 
+        setTodos={(todos) => dispatch({ type: 'SET_TODOS', payload: todos })} 
       />
     </>
   );
